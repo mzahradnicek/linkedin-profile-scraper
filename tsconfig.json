@@ -15,7 +15,7 @@
     "stripInternal": true,
     "strictNullChecks": true,
     "downlevelIteration": true,
-    "lib": ["es6", "DOM"],
+    "lib": ["es6", "DOM", "dom.iterable"],
     "moduleResolution": "node",
     "outDir": "dist",
     "target": "es6",

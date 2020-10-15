@@ -628,7 +628,7 @@ export class LinkedInProfileScraper {
 
         // Using a for loop so we can use await inside of it
         for (const node of nodes) {
-		  const companyPositions = node.querySelectorAll(':scope > ul > li')
+		  let companyPositions = node.querySelectorAll(':scope > ul > li')
 
 		  // we have more positions in one company
 		  if (companyPositions) {
@@ -649,12 +649,12 @@ export class LinkedInProfileScraper {
 					  data.push({
 						title,
 						company,
-					// 	employmentType,
-						location
-					// 	startDate,
-					// 	endDate,
-					// 	endDateIsPresent,
-					// 	description
+						location,
+					 	employmentType: null,
+					 	startDate:null,
+					 	endDate:null,
+					 	endDateIsPresent:false,
+					 	description:null
 					  })
 				  }
 
