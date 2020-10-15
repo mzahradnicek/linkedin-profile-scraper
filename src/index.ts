@@ -623,6 +623,85 @@ export class LinkedInProfileScraper {
 
       statusLog(logSection, `Parsing experiences data...`, scraperSessionId)
 
+      const rawExperiencesData: RawExperience[] = await page.$$eval('#experience-section ul section.ember-view', (nodes) => {
+        let data: RawExperience[] = []
+
+        // Using a for loop so we can use await inside of it
+        for (const node of nodes) {
+		  const companyPositions = node.querySelectorAll(':scope > ul > li')
+
+		  // we have more positions in one company
+		  if (companyPositions) {
+		  		  const companyElement = node.querySelector('.pv-entity__company-summary-info h3');
+				  const companyElementClean = companyElement && companyElement?.querySelector('span') ? companyElement?.removeChild(companyElement.querySelector('span') as Node) && companyElement : companyElement || null;
+				  const company = companyElementClean?.textContent || null
+
+				  // get location
+				  const locationElement = node.querySelector('.pv-entity__location span:nth-child(2)');
+				  const location = locationElement?.textContent || null;
+
+				  // positions in company
+				  for (const position of companyPositions) {
+					  const titleElement = position.querySelector('h3');
+				  	  const titleElementClean = titleElement && titleElement?.querySelector('span') ? titleElement?.removeChild(titleElement.querySelector('span') as Node) && titleElement : titleElement || null;
+					  const title = titleElementClean?.textContent || null
+
+					  data.push({
+						title,
+						company,
+					// 	employmentType,
+						location
+					// 	startDate,
+					// 	endDate,
+					// 	endDateIsPresent,
+					// 	description
+					  })
+				  }
+
+			}
+
+			  const titleElement = node.querySelector('h3');
+			  const title = titleElement?.textContent || null
+
+			  const employmentTypeElement = node.querySelector('span.pv-entity__secondary-title');
+			  const employmentType = employmentTypeElement?.textContent || null
+
+			  const companyElement = node.querySelector('.pv-entity__secondary-title');
+			  const companyElementClean = companyElement && companyElement?.querySelector('span') ? companyElement?.removeChild(companyElement.querySelector('span') as Node) && companyElement : companyElement || null;
+			  const company = companyElementClean?.textContent || null
+
+			  const descriptionElement = node.querySelector('.pv-entity__description');
+			  const description = descriptionElement?.textContent || null
+
+			  const dateRangeElement = node.querySelector('.pv-entity__date-range span:nth-child(2)');
+			  const dateRangeText = dateRangeElement?.textContent || null
+
+			  const startDatePart = dateRangeText?.split('–')[0] || null;
+			  const startDate = startDatePart?.trim() || null;
+
+			  const endDatePart = dateRangeText?.split('–')[1] || null;
+			  const endDateIsPresent = endDatePart?.trim().toLowerCase() === 'present' || false;
+			  const endDate = (endDatePart && !endDateIsPresent) ? endDatePart.trim() : 'Present';
+
+			  const locationElement = node.querySelector('.pv-entity__location span:nth-child(2)');
+			  const location = locationElement?.textContent || null;
+
+          data.push({
+            title,
+            company,
+            employmentType,
+            location,
+            startDate,
+            endDate,
+            endDateIsPresent,
+            description
+          })
+        }
+
+        return data;
+      });
+
+/*
       const rawExperiencesData: RawExperience[] = await page.$$eval('#experience-section ul > .ember-view', (nodes) => {
         let data: RawExperience[] = []
 
@@ -668,6 +747,7 @@ export class LinkedInProfileScraper {
 
         return data;
       });
+	 */
 
       // Convert the raw data to clean data using our utils
       // So we don't have to inject our util methods inside the browser context, which is too damn difficult using TypeScript
