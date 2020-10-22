@@ -334,6 +334,7 @@ class LinkedInProfileScraper {
                                     description: null
                                 });
                             }
+                            continue;
                         }
                         const titleElement = node.querySelector('h3');
                         const title = (titleElement === null || titleElement === void 0 ? void 0 : titleElement.textContent) || null;

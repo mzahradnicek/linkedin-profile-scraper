@@ -657,7 +657,7 @@ export class LinkedInProfileScraper {
 					 	description:null
 					  })
 				  }
-
+				  continue
 			}
 
 			  const titleElement = node.querySelector('h3');
