@@ -558,7 +558,7 @@ export class LinkedInProfileScraper {
       
 
       // To give a little room to let data appear. Setting this to 0 might result in "Node is detached from document" errors
-      await page.waitFor(100);
+      await page.waitFor(4000);
 
       statusLog(logSection, 'Expanding all descriptions by clicking their "See more" buttons', scraperSessionId)
 
