@@ -313,8 +313,7 @@ class LinkedInProfileScraper {
                     let data = [];
                     for (const node of nodes) {
                         let companyPositions = node.querySelectorAll(':scope > ul > li');
-                        console.log('Experiences data', companyPositions);
-                        if (companyPositions) {
+                        if (companyPositions.length) {
                             const companyElement = node.querySelector('.pv-entity__company-summary-info h3');
                             const companyElementClean = companyElement && (companyElement === null || companyElement === void 0 ? void 0 : companyElement.querySelector('span')) ? (companyElement === null || companyElement === void 0 ? void 0 : companyElement.removeChild(companyElement.querySelector('span'))) && companyElement : companyElement || null;
                             const company = (companyElementClean === null || companyElementClean === void 0 ? void 0 : companyElementClean.textContent) || null;

@@ -457,7 +457,7 @@
         "affectsGlobalScope": false
       },
       "../src/index.ts": {
-        "version": "c583d48c2aa42c73a1a9c992ef931b81c2553be401e64aa79c5fe261266d8a28",
+        "version": "1e25a1fd0a99ffade96749cbf176af0700f20fac469dc07879dbca68949a1d57",
         "signature": "02779c6852baeb17573038fa5874cbfba4eff92c24e0fd0ae03ea22d4d8f40fc",
         "affectsGlobalScope": false
       },

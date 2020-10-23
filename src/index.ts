@@ -629,10 +629,10 @@ export class LinkedInProfileScraper {
         // Using a for loop so we can use await inside of it
         for (const node of nodes) {
 		  let companyPositions = node.querySelectorAll(':scope > ul > li')
-		  console.log('Experiences data', companyPositions)
+		  // statusLog(logSection, `Company positions: ${JSON.stringify(companyPositions)}`, scraperSessionId)
 
 		  // we have more positions in one company
-		  if (companyPositions) {
+		  if (companyPositions.length) {
 		  		  const companyElement = node.querySelector('.pv-entity__company-summary-info h3');
 				  const companyElementClean = companyElement && companyElement?.querySelector('span') ? companyElement?.removeChild(companyElement.querySelector('span') as Node) && companyElement : companyElement || null;
 				  const company = companyElementClean?.textContent || null
