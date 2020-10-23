@@ -267,7 +267,7 @@ class LinkedInProfileScraper {
                         utils_1.statusLog(logSection, `Could not find or click expand button selector "${buttonSelector}". So we skip that one.`, scraperSessionId);
                     }
                 }
-                yield page.waitFor(100);
+                yield page.waitFor(4000);
                 utils_1.statusLog(logSection, 'Expanding all descriptions by clicking their "See more" buttons', scraperSessionId);
                 for (const seeMoreButtonSelector of seeMoreButtonsSelectors) {
                     const buttons = yield page.$$(seeMoreButtonSelector);
